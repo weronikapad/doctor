@@ -11,8 +11,8 @@ A terminal app written in Python, made to help users diagnose and fix lagging Wi
 Make sure you have Python 3.10 and Git installed on your machine.
 
 1. Clone the repo by running these commands in your IDE's Bash terminal:
-```git clone [https://github.com/yourusername/system-doctor.git](https://github.com/yourusername/system-doctor.git)
-   cd system-doctor```
+```git clone [https://github.com/yourusername/system-doctor.git](https://github.com/yourusername/system-doctor.git)```
+```cd system-doctor```
 2. Install Groq by running this command in the Bash terminal (you can also use another AI, but certain pieces of code will need to be changed):
 ```pip install groq```
 3. Create an API key, go on this website click create API key
