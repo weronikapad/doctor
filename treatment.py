@@ -38,7 +38,7 @@ ai_commands = ai_commands.replace("[", "").replace("]", "").split(", ")
 def warnings(command0):
     if commands[command0]["warning"] == True:
             
-            y_or_n = input("Would you like to run: " + command0 + " (y/n)" + "\nDESCRIPTION: " + commands[command0]["description"] + "\nWARNING: " + commands[command0]["warning_note"] + "\n")
+            y_or_n = input("\nWould you like to run: " + command0 + " (y/n)" + "\nDESCRIPTION: " + commands[command0]["description"] + "\nWARNING: " + commands[command0]["warning_note"] + "\n")
             
             if y_or_n == "y":
                 #i think it will hold the the varible value so i can later use it for further analysis and printing out value
@@ -99,15 +99,17 @@ def analysis(terminal_output):
 print(f"\nAproved commands proposed by ai: {ai_commands}\n")
 for command in ai_commands:
     value = warnings(command)
+    commands_run = []
     if command in commands:
         if commands[command]["admin_required"] == True:
             if value is not None:
-                choice = input(f"\n{command} reguires admin to be executed, do you authorise the admin rights? (y/n): \n")
+                choice = input(f"\n{command} requires admin to be executed, do you authorise the admin rights? (y/n): \n")
                 if choice == "y":
                     if __name__ == '__main__':
                         if is_admin():
                             print("Running as admin\n")
                         else:
+                            ai_commands -= commands_run #idk abt this but, the idea is that it wont exectue the commands that were previously run
                             ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
                             print("Running as admin\n")
                     else:
@@ -118,25 +120,49 @@ for command in ai_commands:
                     print("Error: unrecognised user input")
             else:
                 print("\nSkipping over " + command)
-
-        if commands[command]["further_analysis"] == True:
-            if value is not None: 
-                print("\nRunnig AI analysis of the report: \n")
+#copyyy
+            if commands[command]["further_analysis"] == True:
+                if value is not None: 
+                    print("\nRunnig AI analysis of the report: \n")
+                    commands_run.append(command)
                 print(analysis(value))
 
-        elif commands[command]["print_value"] == True:
-            if value is not None: 
-                print("\nCommand output: \n")
-                print(value)
+            elif commands[command]["print_value"] == True:
+                if value is not None: 
+                    print("\nCommand output: \n")
+                    commands_run.append(command)
+                    print(value)
 
-        elif commands[command]["further_decisions_inteminal"] == True:
-            if value is not None:
-                print("\nThe command requires further decisions in the terminal: \n")
-                print(value)
-                user_decision = input("\ntype here: ")
-                subprocess.run(user_decision)
+            elif commands[command]["further_decisions_inteminal"] == True:
+                if value is not None:
+                    print("\nThe command requires further decisions in the terminal: \n")
+                    commands_run.append(command)
+                    print(value)
+                    user_decision = input("\ntype here: ")
+                    subprocess.run(user_decision)
         else:
-            sys.exit
+            if commands[command]["further_analysis"] == True:
+                if value is not None: 
+                    print("\nRunnig AI analysis of the report: \n")
+                    commands_run.append(command)
+                print(analysis(value))
+
+            elif commands[command]["print_value"] == True:
+                if value is not None: 
+                    print("\nCommand output: \n")
+                    commands_run.append(command)
+                    print(value)
+
+            elif commands[command]["further_decisions_inteminal"] == True:
+                if value is not None:
+                    print("\nThe command requires further decisions in the terminal: \n")
+                    commands_run.append(command)
+                    print(value)
+                    user_decision = input("\ntype here: ")
+                    subprocess.run(user_decision)
+            else:
+                commands_run.append(command)
+                value
     else:
         print("\nThe command " + command + " was not found in the database")
         

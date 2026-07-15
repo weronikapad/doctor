@@ -25,7 +25,7 @@ commands = {
         "admin_required": True,
         "further_analysis": False,
         "further_decisions_inteminal": True,
-        "print_value":False,
+        "print_value":True,
         "warning": False,
         "warning_note": "none"
     },
@@ -141,7 +141,7 @@ commands = {
         "warning": False,
         "warning_note": "none"
     },
-    "netsh mbn show connection": {
+    "netsh mbn show connection": {  #ts isnt working!!!!
         "name": "netsh mbn show connection",
         "description": "Launches a powerful network configuration console that allows you to directly edit, reset, or view your system's firewalls and network card settings.",
         "admin_required": False,
