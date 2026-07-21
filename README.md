@@ -12,9 +12,9 @@ A terminal app written in Python, made to help users diagnose and fix lagging Wi
 - **Conditional feedback loop**: In the command database, each command is assigned some variables. Because of this, after running certain commands, another report will generate or the user will have to make some additional decisions in the terminal
 
 ## Setting it up your own machine
-1. Dowload the main.zip file from this repo's releases
+1. Dowload the output.zip file from this repo's releases
 2. Unzip it
-3. Double-click on the main.exe to start the program
+3. Double-click on the main app to start the program
 4. Because the binary is unsigned, Windows SmartScreen may pop up. Click "More info" and then "Run anyway"
 5. Some commands require Admin right to be run and the program will ask the user for them but, the user has full control over whether or not they choose to authorise admin rights or not
 
